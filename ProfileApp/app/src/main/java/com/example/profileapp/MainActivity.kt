@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         val descriptionText = findViewById<TextView>(R.id.descriptionText)
         val currentJobText = findViewById<TextView>(R.id.currentJobText)
         val experienceLayout = findViewById<LinearLayout>(R.id.experienceLayout)
+        val projectLayout = findViewById<LinearLayout>(R.id.projectLayout) // Novo layout para projetos
+
         // Definindo informações de perfil
         nameText.text = "Ana Silva"
         descriptionText.text = "Desenvolvedora de software com 5 anos de experiência."
@@ -37,6 +39,19 @@ class MainActivity : AppCompatActivity() {
             textView.text = experiencia
             textView.textSize = 16f
             experienceLayout.addView(textView)
+        }
+
+        val projetos = listOf(
+            "Projeto 1: Aplicativo de Gestão Financeira - KillBills.",
+            "Projeto 2: Plataforma de E-commerce - Jogo do Leãozinho.",
+            "Projeto 3: Sistema Ambiental - QuixAlert!."
+        )
+
+        for (projeto in projetos) {
+            val textView = TextView(this)
+            textView.text = projeto
+            textView.textSize = 16f
+            projectLayout.addView(textView)
         }
 
         profileImage.setOnClickListener {
