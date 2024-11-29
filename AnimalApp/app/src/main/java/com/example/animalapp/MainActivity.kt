@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Button
@@ -32,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -69,17 +67,24 @@ fun AnimalAppMenu(onOptionSelected: (String) -> Unit) {
         onDismissRequest = { expanded = false }
     ) {
         DropdownMenuItem(
-            text = { Text("Dog") }, // Novo padrão para o conteúdo
+            text = { Text("Chicken") }, // Novo padrão para o conteúdo
             onClick = {
                 expanded = false
-                onOptionSelected("Dog")
+                onOptionSelected("Chicken")
             }
         )
         DropdownMenuItem(
-            text = { Text("Cat") }, // Novo padrão para o conteúdo
+            text = { Text("Horse") }, // Novo padrão para o conteúdo
             onClick = {
                 expanded = false
-                onOptionSelected("Cat")
+                onOptionSelected("Horse")
+            }
+        )
+        DropdownMenuItem(
+            text = { Text("Cow") }, // Novo padrão para o conteúdo
+            onClick = {
+                expanded = false
+                onOptionSelected("Cow")
             }
         )
     }
@@ -113,9 +118,24 @@ fun HomeScreen(onAnimalSelected: (String) -> Unit) {
 @Composable
 fun AnimalScreen(animal: String) {
     val context = LocalContext.current
-    val imageRes = if (animal == "Dog") R.drawable.dog else R.drawable.cat
-    val soundRes = if (animal == "Dog") R.raw.dog_bark else R.raw.cat_meow
-    val videoRes = if (animal == "Dog") R.raw.dog_video else R.raw.cat_video
+    val imageRes = when (animal) {
+        "Chicken" -> R.drawable.chicken
+        "Horse" -> R.drawable.horse
+        else -> R.drawable.cow
+    }
+
+    val soundRes = when (animal) {
+        "Chicken" -> R.raw.chicken_sound
+        "Horse" -> R.raw.horse_sound
+        else -> R.raw.cow_sound
+    }
+
+    val videoRes = when (animal) {
+        "Chicken" -> R.raw.chicken_video
+        "Horse" -> R.raw.horse_video
+        else -> R.raw.cow_video
+    }
+
 
     Column(
         modifier = Modifier
@@ -129,7 +149,6 @@ fun AnimalScreen(animal: String) {
             contentDescription = "$animal Image",
             modifier = Modifier
                 .size(200.dp)
-                .clip(CircleShape)
         )
         Spacer(modifier = Modifier.height(16.dp))
 
